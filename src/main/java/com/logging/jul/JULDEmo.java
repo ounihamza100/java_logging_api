@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The Logger you create is actually a hierarchy of Loggers, and a . (dot) in the hierarchy indicates a level in the hierarchy.
@@ -130,31 +131,41 @@ import java.util.logging.Level;
 public class JULDEmo {
 
 
+    // use the classname for the logger, this way you can refactor
+    private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
+
+    public void doSomeThingAndLog() {
+        // ... more code
+
+        // now we demo the logging
+
+        // set the LogLevel to Severe, only severe Messages will be written
+        LOGGER.setLevel(Level.SEVERE);
+        LOGGER.severe("severe Log");
+        LOGGER.warning("warning Log");
+        LOGGER.info("info Log");
+        LOGGER.finest("Really not important");
+
+        // set the LogLevel to Info, severe, warning and info will be written
+        // finest is still not written
+        LOGGER.setLevel(Level.INFO);
+        LOGGER.severe("severe Log");
+        LOGGER.warning("warning Log");
+        LOGGER.info("info Log");
+        LOGGER.finest("Really not important");
+    }
+
     public static void main(String[] args) {
-        Inner i = new Inner();
-        i.file_hundler();
-        i.test_jul();
+        JULDEmo tester = new JULDEmo();
+        try {
+            MyLogger.setup();
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Problems with creating the log files");
+        }
+        tester.doSomeThingAndLog();
     }
 
-    static class Inner{
-        java.util.logging.Logger logger =  java.util.logging.Logger.getLogger(this.getClass().getName());
-        void test_jul() {
-            //Log levels INFO and higher will be automatically written to the console. so fine log level will not be written in the console
-            logger.info("This is an info message");
-            logger.fine("Here is a debug message"); // == DEBUG
-            logger.severe("This is an error message"); // == ERROR
 
-        }
-
-        void file_hundler() {
-            ConsoleHandler consoleHandler = null;
-            try {
-                consoleHandler = new ConsoleHandler();
-                logger.addHandler(consoleHandler);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }
-    }
 }

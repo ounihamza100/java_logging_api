@@ -1,0 +1,8 @@
+août 17, 2020 9:58:47 AM com.logging.jul.JULDEmo doSomeThingAndLog
+GRAVE: severe Log
+août 17, 2020 9:58:47 AM com.logging.jul.JULDEmo doSomeThingAndLog
+GRAVE: severe Log
+août 17, 2020 9:58:47 AM com.logging.jul.JULDEmo doSomeThingAndLog
+AVERTISSEMENT: warning Log
+août 17, 2020 9:58:47 AM com.logging.jul.JULDEmo doSomeThingAndLog
+INFOS: info Log
