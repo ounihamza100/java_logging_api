@@ -23,6 +23,8 @@ public class MyLogger {
         if (handlers[0] instanceof ConsoleHandler) {
             rootLogger.removeHandler(handlers[0]);
         }
+        //reset() will remove all default handlers
+        //LogManager.getLogManager().reset();
         logger.setLevel(Level.INFO);
         fileTxt = new FileHandler("Logging.txt");
         fileHTML = new FileHandler("Logging.html");
